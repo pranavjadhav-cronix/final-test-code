@@ -1,0 +1,134 @@
+{{ 'section-checklist-block.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="section-{{ section.id }}-padding checklist-{{ section.id }} page-width">
+
+  <div class="checklist-content">
+    {% if section.settings.title-chk %}
+      <h2 class="title-chk">{{ section.settings.title-chk }}</h2>
+    {% endif %}
+    {% if section.settings.text-chk %}
+      <p class="text-chk">{{ section.settings.text-chk }}</p>
+    {% endif %}
+
+    <ul class="checklist-list">
+      {%- for block in section.blocks -%}
+        <a class="link-chk" href="{{ block.settings.img-text-url-chk }}">
+        <li class="list-items-chk">
+          {% if block.settings.image-chk %}
+            {{ block.settings.image-chk | image_url: width: 160, height: 160 | image_tag: class: 'block-img-chk' }}
+          {% endif %}
+          {% if block.settings.img-text-chk != blank %}
+            <span class="link-chk">
+              <p class="text-chk-link">{{ block.settings.img-text-chk }}</p>
+              {% render 'arrow-right.liquid' %}
+            </span>
+          {% endif %}
+        </li>
+        </a>
+      {% endfor %}
+    </ul>
+
+    
+  </div>
+  
+</section>
+
+{% schema %}
+  {
+    "name": "Checklist-Block",
+    "tag": "section",
+    "class": "checklist-block",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+       {
+        "type": "header",
+        "content": "Heading"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "title-chk",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "text-chk",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 52
+      }
+    ],
+    "blocks": [
+      {
+        "type": "@app"
+      },
+       {
+        "type": "info_block",
+        "name": "Section Block",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Headings"
+          },
+          {
+            "type": "image_picker",
+            "id": "image-chk",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "img-text-chk",
+            "label": "Image Text",
+          },
+          {
+            "type": "url",
+            "id": "img-text-url-chk",
+            "label": "Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Checklist Block"
+      }
+    ]
+  }
+{% endschema %}

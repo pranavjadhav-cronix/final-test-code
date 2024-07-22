@@ -1,0 +1,136 @@
+{{ 'header-custom.css' | asset_url | stylesheet_tag }}
+{{ 'base.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="header-flex page-width section-{{ section.id }}-padding header-{{ section.id }}">
+  <div class="logo-list">
+    {% if section.settings.logo-header %}
+      <a href="#">{{ section.settings.logo-header |image_url: width: 150 | image_tag: class: 'logo-img' }}</a>
+    {% endif %}
+    <svg class="icon-search">
+      {% render 'search-icon' %}
+    </svg>
+  </div>
+
+  <ul class="list-nav">
+    <li>
+      <a class="link-none" href="#">How It Works</a>
+    </li>
+    <li>
+      <a class="link-none" href="#">Shop Checklists</a>
+    </li>
+    <li>
+      {% if section.settings.button-hd %}
+        <a class="custom-button_solid" href="{{ section.settings.button_url-hd }}">{{ section.settings.button-hd }}</a>
+      {% endif %}
+    </li>
+  </ul>
+  <button class="hamburger-button-open" aria-expanded="false">
+      {% render 'hamburger-icon' %}
+  </button>
+  
+  <ul class="main-menu-hd fade-in-bg">
+  <button class="hamburger-button-close" aria-expanded="false">
+    <svg class="icon-close">
+      {% render 'icon-close' %}
+    </svg>
+  </button>
+        
+    {% for links in section.settings.menu_links.links %}
+      <li class="menu-list-hd">
+       {{ links.title | link_to: links.url }}
+      </li>
+    {% endfor %}
+  </ul>
+
+</div>
+
+<script>
+  document.querySelector('.hamburger-button-open').addEventListener('click',() => {
+    document.querySelector('.main-menu-hd').classList.add('active');
+});
+
+  document.querySelector('.hamburger-button-close').addEventListener('click',() => {
+    document.querySelector('.main-menu-hd').classList.remove('active');
+});
+</script>
+
+{% schema %}
+{
+  "name": "Header Custom",
+  "tag": "header",
+  "class": "header-cust",
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "Logo",
+      "id": "logo-header"
+    },
+    {
+      "type": "link_list",
+      "label": "Menu Links",
+      "id": "menu_links"
+    },
+    {
+      "type": "text",
+      "label": "Button",
+      "id": "button-hd",
+      "default": "Sign Up"
+    },
+    {
+      "type": "url",
+      "label": "Button url",
+      "id": "button_url-hd"
+    },
+    {
+      "type": "header",
+      "content": "Header Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Header Custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

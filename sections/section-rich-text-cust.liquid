@@ -1,0 +1,138 @@
+{{ 'section-rich-text-cust.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  .cust-text-{{ section.id }} h2.heading-rt {
+    font-family: {{ section.settings.heading_font-rt.family }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="section-{{ section.id }}-padding cust-text-{{ section.id }} page-width">
+
+  <div class="cust-text-content">
+    {% if section.settings.heading %}
+      <h2 class="heading-rt">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% for block in section.blocks %}
+      {% if block.settings.text-rt %}
+        <p class="text-rt">{{ block.settings.text-rt }}</p>
+      {% endif %}
+
+      <div class="buttons-flex">
+        {% if block.settings.first_button-rt %}
+          <a class="custom-button_outline" href="{{ block.settings.first_button_link-rt }}">{{ block.settings.first_button-rt }}</a>
+        {% endif %}
+        {% if block.settings.second_button-rt %}
+          <a class="custom-button_solid" href="{{ block.settings.second_button_link-rt }}">{{ block.settings.second_button-rt }}</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Rich Text Custom",
+  "tag": "section",
+  "class": "rich-text-custom",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "label": "Heading",
+      "id": "heading"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font-rt",
+      "label": "Heading Font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "richtext",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "label": "Text",
+          "id": "text-rt"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Outline Button",
+          "id": "first_button-rt"
+        },
+        {
+          "type": "url",
+          "label": "Outline Button Link",
+          "id": "first_button_link-rt"
+        },
+        {
+          "type": "text",
+          "label": "Solid Button",
+          "id": "second_button-rt"
+        },
+        {
+          "type": "url",
+          "label": "Solid Button Link",
+          "id": "second_button_link-rt"
+        },
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich Text Custom"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

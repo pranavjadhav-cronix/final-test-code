@@ -1,0 +1,80 @@
+.value-{{ section.id }} .value-content.page-width {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.value-{{ section.id }} h2.heading-value-vp {
+    color: #343432;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin: 1.8rem;
+}
+
+.value-{{ section.id }} ul.main-list-vp {
+    list-style: none;
+    padding: 3rem;
+    text-align: center;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.value-{{ section.id }} ul {
+    list-style: disc;
+    padding-left: 0;
+    text-align: left;
+}
+
+.value-{{ section.id }} h3.title-vp {
+    color: #FFF;
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 48px;
+    margin: 0.5rem;
+}
+
+.value-{{ section.id }} ul.details-list {
+    color: #FFF;
+    font-family: "DM Sans";
+    font-size: 2rem;
+    font-style: normal;
+    line-height: 24px;
+}
+
+@media screen and (min-width: 750px) {
+
+  .value-{{ section.id }} .value-content.page-width {
+      flex-wrap: nowrap;
+      gap: 7rem;
+  }
+  
+  .value-{{ section.id }} h2.heading-value-vp {
+    color: #FFF;
+    font-family: Ogg;
+    font-size: 5rem;
+    line-height: 96px;
+  }
+
+  .value-{{ section.id }} ul.main-list-vp.vp-block-{{ block.id }} {
+      padding: 0;
+  }
+
+  .value-{{ section.id }} .value-{{ section.id }} ul.main-list-vp {
+      padding: 0;
+  }
+
+  .value-{{ section.id }} h3.title-vp {
+      margin-top: 1rem;
+      margin-bottom: 2.2rem;
+  }
+
+}

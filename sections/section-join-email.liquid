@@ -1,0 +1,115 @@
+{{ 'section-join-email.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  .email-{{ section.id }} {
+    color: {{ section.settings.section-text-color }};
+    background-color: {{ section.settings.section-background-color }};
+    text-align: {{ section.settings.alignment-em }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+{%- endstyle -%}
+
+<section class="section-{{ section.id }}-padding email-{{ section.id }}">
+  <div class="email-content page-width">
+    {% if section.settings.heading-em %}
+      <h2 class="email-heading">{{ section.settings.heading-em }}</h2>
+    {% endif %}
+    {% if section.settings.text-em %}
+      <p class="email-text">{{ section.settings.text-em }}</p>
+    {% endif %}
+
+  <div class="email-form">
+    <input type="text" placeholder="" class="input-field">
+    <button class="join-button">{{ section.settings.join-btn }}</button>
+  </div>
+
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Join Mail",
+  "tag": "section",
+  "class": "join-mail",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "label": "Heading",
+      "id": "heading-em",
+      "default": "Join Our Mailing List"
+    },
+    {
+      "type": "richtext",
+      "label": "Text",
+      "id": "text-em",
+      "default": "<p>Stay updated on the latest products, tips, and access to promotions.<p>"
+    },
+    {
+      "type": "color",
+      "label": "Background Color",
+      "id": "section-background-color",
+      "default": "#89a09d"
+    },
+    {
+      "type": "color",
+      "label": "Text Color",
+      "id": "section-text-color",
+      "default": "#ffffff"
+    },
+    {
+       "type": "text_alignment",
+       "id": "alignment-em",
+       "label": "Text Alignment",
+       "default": "center"
+    },
+    {
+       "type": "text",
+       "id": "join-btn",
+       "label": "Button",
+       "default": "Join"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Join Mail"
+    }
+  ]
+}
+{% endschema %}

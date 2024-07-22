@@ -1,0 +1,100 @@
+.checklist-{{ section.id }} .checklist-content {
+    text-align: center;  
+}
+
+.checklist-{{ section.id }} .checklist-content ul.checklist-list {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;    
+    padding-top: 2rem;
+    padding-left: 0;
+}
+
+.checklist-{{ section.id }} .checklist-content h2.title-chk {
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 2rem;
+    margin: 0;
+}
+
+.checklist-{{ section.id }} .checklist-content ul.checklist-list li.list-items-chk {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.checklist-{{ section.id }} .checklist-content ul.checklist-list li.list-items-chk span.link-chk a {
+    text-decoration: none;
+    color: #343432;
+}
+
+.checklist-{{ section.id }} .checklist-content ul.checklist-list li.list-items-chk span.link-chk {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checklist-{{ section.id }} .checklist-content img.block-img-chk {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.checklist-{{ section.id }} .checklist-content .disp-none {
+    display: none;
+} 
+
+.checklist-{{ section.id }} .checklist-content p.text-chk-link {
+    font-size: 1.4rem;
+    margin: 0;
+    color: #343432;
+}
+
+.checklist-{{ section.id }} .checklist-content a.link-chk {
+    text-decoration: none;
+    transition: all ease-in-out .2s;
+}
+
+.checklist-{{ section.id }} .checklist-content a.link-chk:hover {
+    text-decoration: underline;
+    color: #343432;
+    opacity: .9;
+}
+
+@media screen and (min-width: 750px) {
+  
+  .checklist-{{ section.id }} .checklist-content ul.checklist-list {
+      padding-top: 3rem;
+  }
+  
+  .checklist-{{ section.id }} .checklist-content h2.title-chk {
+      font-size: 3rem;
+  }
+  
+  .checklist-{{ section.id }} .checklist-content ul.checklist-list li.list-items-chk {
+      align-items: unset;
+      border-bottom: 3px solid #000;
+  }
+  
+  .checklist-{{ section.id }} .checklist-content img.block-img-chk {
+      width: 160px;
+      height: 160px;
+      border-radius: unset;
+  }
+  
+  .checklist-{{ section.id }} .checklist-content .disp-none {
+      display: unset;
+  } 
+
+  .checklist-{{ section.id }} .checklist-content p.text-chk-link {
+      font-size: 2rem;
+  }
+  
+}
+

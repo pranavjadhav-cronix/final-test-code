@@ -1,0 +1,105 @@
+.testimonial-{{ section.id }} .testimonial-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.testimonial-{{ section.id }} ul.testimonial-content {
+    width: 100%;
+    list-style: none;
+    padding: 2rem;
+    margin: 0;
+}
+
+.testimonial-{{ section.id }} ul.testimonial-content img.ico-imgage-tm {
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+    grid-area: image-icon;
+}
+
+.testimonial-{{ section.id }} ul.testimonial-content p {
+    color: var(--Inhaven-Coal, #343432);
+    font-size: 1.7rem;
+    line-height: 28px;
+    grid-area: text-content;
+}
+
+.testimonial-{{ section.id }} ul.testimonial-content h5.user-tm {
+    margin: 0;
+    color: var(--Inhaven-Coal, #343432);
+    text-align: left;
+    font-family: "DM Sans";
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.testimonial-{{ section.id }} ul.testimonial-content p.host-tm {
+    text-align: right;
+    margin: 0;
+    color: var(--Inhaven-Coal, #343432);
+    font-size: 1.6rem;
+    line-height: 24px;
+}
+
+.testimonial-{{ section.id }} ul.testimonial-content .user-host {
+    grid-area: user-host;
+}
+
+.testimonial-{{ section.id }} ul.testimonial-content li.block-list-item-tm {
+    display: grid;
+    grid-template-areas:
+        'image-icon user-host'
+        'text-content text-content';
+    align-items: end;
+    justify-content: start;
+    justify-items: start;
+    grid-template-columns: 1fr 2fr;
+}
+
+  .testimonial-{{ section.id }} .user-host {
+      justify-self: left;
+      text-align: left;
+  }
+
+@media screen and (min-width: 750px) {
+
+  .testimonial-{{ section.id }} ul.testimonial-content img.ico-imgage-tm {
+      width: 110px;
+  }
+  
+  .testimonial-{{ section.id }} ul.testimonial-content {
+      width: 100%;
+      list-style: none;
+      padding: 5rem;
+  }
+  .testimonial-{{ section.id }} ul.testimonial-content h5.user-tm {
+      text-align: right;
+  }
+  
+  .testimonial-{{ section.id }} .testimonial-flex {
+      display: flex;
+      flex-wrap: nowrap;
+  }
+
+  .testimonial-{{ section.id }} ul.testimonial-content.block-bg-text_A7qCRp {
+      padding-left: 10rem;
+  }
+  
+  .testimonial-{{ section.id }} ul.testimonial-content.block-bg-text_Jm3pdj {
+      padding-right: 10rem;
+  }
+
+  .testimonial-{{ section.id }} ul.testimonial-content li.block-list-item-tm {
+      grid-template-areas:
+          'image-icon'
+          'text-content'
+          'user-host';        
+      grid-template-columns: 1fr;
+  }
+
+  .testimonial-{{ section.id }} .user-host {
+      justify-self: right;
+      text-align: right;
+  }
+
+}

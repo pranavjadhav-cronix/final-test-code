@@ -1,0 +1,127 @@
+{{ 'section-about.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+{%- endstyle -%}
+
+<section class="section-{{ section.id }}-padding about-{{ section.id }}">
+  <div class="about-content">
+
+    {% if section.settings.image-position-ab == "left" %}
+      <style>
+        .about-{{ section.id }} .about-content {
+            flex-direction: row-reverse;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        
+        .about-{{ section.id }} .about-content img.side-img-ab {
+            transform: rotateY(180deg);
+        }
+
+        @media screen and (min-width: 750px) {
+          .about-{{ section.id }} .about-content {
+            margin-left: 0;
+            margin-right: 8rem;
+        }
+        }
+        
+      </style>
+    {% endif %}
+    
+    <div class="text-content">
+      {% if section.settings.heading-ab %}
+        <h2 class="heading-ab">{{ section.settings.heading-ab }}</h2>
+      {% endif %}
+      {% if section.settings.text-ab %}
+        <p class="text-ab">{{ section.settings.text-ab }}</p>
+      {% endif %}
+    </div>
+    
+    <div class="image-content">
+      {% if section.settings.image-ab %}
+        {{ section.settings.image-ab | image_url: width: 650 | image_tag: class: 'side-img-ab' }}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About",
+  "class": "about",
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "Image",
+      "id": "image-ab"
+    },
+    {
+      "type": "richtext",
+      "label": "Heading",
+      "id": "heading-ab"
+    },
+    {
+      "type": "richtext",
+      "label": "Text",
+      "id": "text-ab",
+    },
+    {
+      "type": "select",
+      "id": "image-position-ab",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "About"
+    }
+  ]
+}
+{% endschema %}

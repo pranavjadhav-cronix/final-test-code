@@ -1,0 +1,160 @@
+{{ 'section-blog-cust.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="section-{{ section.id }}-padding featured-blog-cust-{{ section.id }} page-width">
+
+
+  <div class="featured-blog-content">
+    <div id="heading">
+      {% if section.settings.title-fb %}
+        <h2 class="heading-title">{{ section.settings.title-fb }}</h2>
+      {% endif %}
+      {% if section.settings.text-fb %}
+        <a id="link-all" href="{{ section.settings.text-url-fb }}">{{ section.settings.text-fb }}</a>
+      {% endif %}
+    </div>
+
+  <ul class="features-list">
+    {%- for blog in section.settings.blog.articles -%}   
+      <li class="features-list-items">
+        <a href="{{ blog.url }}">
+          {% if blog.image %}
+            {{ blog.image | image_url: width: 280, height: 175 | image_tag: class: 'block-img-blog' }}
+          {% endif %}
+          {% if blog.title %}
+            <h4 class="title-blog">{{ blog.title }}</h4>
+          {% endif %}
+          {% if blog.published_at %}
+            <p class="text-blog">{{ blog.published_at | date: "%B %d, %Y" }}</p>
+          {% endif %}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</section>
+
+
+<script>
+  $('.featured-blog-content ul.features-list').slick({
+  infinite: true,
+  speed: 300,  
+  autoplay: true,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+    }
+    },
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
+</script>
+
+{% schema %}
+  {
+    "name": "Blog Custom",
+    "tag": "section",
+    "class": "blog-custom",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+       {
+        "type": "header",
+        "content": "Heading"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "title-fb",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "text-fb",
+        "label": "Link Text"
+      },
+      {
+        "type": "url",
+        "id": "text-url-fb",
+        "label": "Link URL"
+      },
+      {
+        "type": "blog",
+        "id": "blog",
+        "label": "Blog"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 52
+      }
+    ],
+    "presets": [
+      {
+        "name": "Blog Custom"
+      }
+    ]
+  }
+{% endschema %}
